@@ -1,2 +1,2 @@
 # AppBox Home
-tryappbox.github.io
+http://tryappbox.github.io
