@@ -59,8 +59,8 @@
 
     <div class="container">
       <div class="docs-sub-content">
-        <h2 class="page-title">Keep Same Link</h2>
-        <p class="page-description">Download the previous build with same url...</p>
+        <h2 class="page-title">Upload Chunk Size</h2>
+        <p class="page-description">Upload your large IPA file in chunk...</p>
       </div>
     </div>
   </div>
@@ -69,17 +69,17 @@
     <div class="column-group">
       <div class="column lg-units-8 docs-content">
         <div class="docs-section">
-          <h3>What is keep same link?</h3>
-          <p>This feature will keep same short url for all future build/ipa uploaded with same bundle identifier. If this option is enabled, you can also download the previous build with same url.</p>
-          <p>When you've uploaded more than one app with "Keep Same Link" option enable and open the short url in your iOS Device, you'll see two option is there</p>
-          <h3>1. Install Application</h3>
-          <p>Install Application button will always install the latest build. (Demo URL - <a href="https://goo.gl/jsr9JO" target="_blank">https://goo.gl/jsr9JO</a>) It's look like</p>
-          <img style="width:50%" src="/Images/webpage1.png" />
-          <h3>2. Install Previous Build</h3>
-          <p>Install Previous Build button open another page, which contains all list of all uploaded with date and time based on iOS Device local. You can install the any previous build from this page</p>
-          <img style="width:50%" src="/Images/webpage2.png" />
-          <p>You can change the link by providing a "Custom Dropbox Folder Name" in "Other Setting".</p>
-          <img style="width:100%" src="/Images/NewURL.png" />
+          <h3>What is Upload Chunk Size?</h3>
+          <p>Default chunk size is 100MB, means AppBox will upload IPA file with 100MB partitions. You can set chunk size from AppBox Preferences (⌘ + ,). </p>
+          <p>Like, if you'll select 100MB chunk size in preferences, appbox will break 2GB (2048MB) IPA file into 21 part</p>
+          <code>
+          2GB = 2048MB
+          2048/100 = 20.48 ~= 21
+          </code>
+          <p>here 20 part will be equally separated into 100MB and last part will be size of 48MB</p>
+          <code>
+          (20 * 100) + 48 = 2048 MB = 2GB</p>
+          </code>
         </div>
       </div>
 
