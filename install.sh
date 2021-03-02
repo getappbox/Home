@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="2.9.1"
+VERSION="2.9.5"
 APP_NAME="AppBox.app"
 FILE_NAME="AppBox.tar.gz"
 FILE_URL="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/download/$VERSION/AppBox.tar.gz"
