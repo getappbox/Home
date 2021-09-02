@@ -1,106 +1,438 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AppBox</title>
-  <meta name="description" content="AppBox: Build and deploy Development, Ad-Hoc and In-house (Enterprise) iOS applications directly to the devices from your Dropbox account.">
-  <meta name="author" content="Connor Sears">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-  <link rel="icon" href="/favicon.ico">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <!-- Google Web Fonts -->
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700%7COpen+Sans:400,300">
-  <link rel="stylesheet" href="/dist/css/ratchet.min.css">
-  <link rel="stylesheet" href="/assets/css/docs.min.css">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/apple-touch-icon-114x114.png">
-
-  <script>
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-85215717-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Software 2.0 </title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <!-- Bootstrap , fonts & icons  -->
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <link rel="stylesheet" href="./fonts/icon-font/css/style.css">
+  <link rel="stylesheet" href="./fonts/typography-font/typo.css">
+  <link rel="stylesheet" href="./fonts/fontawesome-5/css/all.css">
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Plugin'stylesheets  -->
+  <link rel="stylesheet" href="./plugins/aos/aos.min.css">
+  <link rel="stylesheet" href="./plugins/slick/slick.min.css">
+  <!-- Vendor stylesheets  -->
+  <link rel="stylesheet" href="./css/main.css">
+  <!-- Custom stylesheet -->
 </head>
 
-<body class="docs-home" ontouchstart="">
-  <div class="docs-header">
-    <header class="docs-masthead clearfix">
+<body data-theme-mode-panel-active data-theme="light" style="font-family: 'Mazzard H';">
+  <div class="site-wrapper overflow-hidden position-relative">
+    <!-- Site Header -->
+    <!-- Preloader -->
+    <!-- <div id="loading">
+      <div class="preloader">
+        <img src="./image/preloader.gif" alt="preloader">
+      </div>
+    </div>  -->
+
+    <!--Site Header Area -->
+    <header class="site-header site-header--menu-left landing-11-menu site-header--absolute site-header--sticky">
       <div class="container">
-        <div class="column">
-          <h1 class="docs-title">
-            <a href="/" data-ignore="push">AppBox</a>
-          </h1>
-          <nav class="docs-nav clearfix">
-            <a class="docs-nav-trigger icon icon-bars pull-right js-docs-nav-trigger" href="#"></a>
-            <div class="docs-nav-group">
-              <a class="docs-nav-item" href="/" data-ignore="push">Home</a>
-              <a class="docs-nav-item" href="/features" data-ignore="push">Features</a>
-              <a class="docs-nav-item" href="https://docs.getappbox.com" data-ignore="push">Docs</a>
-              <a class="docs-nav-item" href="/components" data-ignore="push">Components</a>
-              <a class="docs-nav-item" href="/about" data-ignore="push">About</a>
-              <a class="docs-nav-item" href="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation" data-ignore="push">GitHub</a>
-            </div>
-          </nav>
-        </div>
+        <nav class="navbar site-navbar">
+          <!-- Brand Logo-->
+          <div class="brand-logo">
+            <a href="#">
+              <img src="Images/appbox.png">
+              <span>AppBox</span>
+            </a>
+          </div>
+          <div class="menu-block-wrapper">
+            <div class="menu-overlay"></div>
+            <nav class="menu-block" id="append-menu-header">
+              <div class="mobile-menu-head">
+                <div class="go-back">
+                  <i class="fa fa-angle-left"></i>
+                </div>
+                <div class="current-menu-title"></div>
+                <div class="mobile-menu-close">&times;</div>
+              </div>
+              <ul class="site-menu-main">
+                <li class="nav-item nav-item-has-children">
+                  <a href="#" class="nav-link-item drop-trigger">Getting Started<i class="fas fa-angle-down"></i>
+                  </a>
+                  <ul class="sub-menu" id="submenu-9">
+                    <li class="sub-menu--item">
+                      <a href="https://docs.getappbox.com/GettingStarted/useappbox/" target="_blank">How to use AppBox?</a>
+                    </li>
+                    <li class="sub-menu--item">
+                      <a href="https://docs.getappbox.com/ContinuousIntegration/usewithjenkinsandgitlab/" target="_blank">Continuous Integration</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item nav-item-has-children">
+                  <a href="#" class="nav-link-item drop-trigger">Features<i class="fas fa-angle-down"></i>
+                  </a>
+                  <ul class="sub-menu" id="submenu-9">
+                    <li class="sub-menu--item">
+                      <a href="https://docs.getappbox.com/Features/keepsamelink/" target="_blank">Keep Same Link</a>
+                    </li>
+                    <li class="sub-menu--item">
+                      <a href="https://docs.getappbox.com/Features/uploadchunksize/" target="_blank">Upload Chunk Size</a>
+                    </li>
+                    <li class="sub-menu--item">
+                      <a href="https://docs.getappbox.com/Features/downloadipa/" target="_blank">Download IPA</a>
+                    </li>
+                    <li class="sub-menu--item">
+                      <a href="https://docs.getappbox.com/Features/moredetails/" target="_blank">More Details</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a href="https://docs.getappbox.com/" target="_blank" class="nav-link-item">Docs</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://paypal.me/vineetchoudhary" target="_blank" class="nav-link-item">Support</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="header-btns  header-btn-l11 ms-auto d-none d-xs-inline-flex align-items-center">
+            <a class="download-trail-btn btn focus-reset" href="/download">
+              Download AppBox
+            </a>
+          </div>
+          <!-- mobile menu trigger -->
+          <div class="mobile-menu-trigger">
+            <span></span>
+          </div>
+          <!--/.Mobile Menu Hamburger Ends-->
+        </nav>
       </div>
     </header>
-
-    <div class="docs-header-content">
-      <p class="docs-subtitle">Build and deploy Development, Ad-Hoc and In-house (Enterprise) iOS applications directly to the devices from your Dropbox account.</p>
-      <a data-ignore="push" href="/download" class="btn btn-primary" onClick="_gaq.push(['_trackEvent', 'Downloads', 'Latest']);">Download AppBox</a><br>
-      <a data-ignore="push" href="/screenshot" style="color: rgba(255,255,255,.8);">Screen Shots</a>
+    <!-- navbar- -->
+    <!-- Hero Area -->
+    <div class="hero-area-l11 position-relative z-index-1 overflow-hidden">
+      <div class="container position-relative">
+        <div class="row position-relative justify-content-center">
+          <div class="col-xl-8 col-lg-9 col-md-12 order-lg-1 order-1" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
+            <div class="content">
+              <h1>Development & In-house<br class="d-none d-md-block"> Apps Wireless Installation</h1>
+              <div class="row banner-l-11-bottom-content">
+                <div class="col-lg-8 col-md-8 col-sm-10">
+                  <p class="position-relative banner-main-content-l-12">AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc, and In-house (Enterprise) applications directly to the devices from your Dropbox account.
+                    <span class="line-left-content"></span>
+                  </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 flex-y-center ">
+                  <a class="btn l-11-hero-btn" href="/download">Download AppBox</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-9 order-lg-1 order-0" data-aos="fade-up" data-aos-duration="800" data-aos-once="true">
+            <img src="Images/UploadIPA-Dark.png" alt="" class="w-100 hero-l11-main-image">
+          </div>
+        </div>
+      </div>
+      <div class="hero-shape-l11-1 d-none d-md-block">
+        <img src="./image/l2/hero-shape-1.svg" alt="">
+      </div>
+      <div class="hero-shape-l11-2 d-none d-md-block">
+        <img src="./image/l2/hero-shape-2.png" alt="">
+      </div>
+    </div>
+    <!-- Brand-area -->
+    <div class="brand-area-l11">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-duration="800" data-aos-once="true">
+            <div class="content section-heading-5 text-center">
+              <h2><i>trusted by many & you</i></h2>
+            </div>
+            <div class="brand-logos d-flex justify-content-center justify-content-xl-between align-items-center flex-wrap ">
+              <div class="single-brand">
+                <img src="Images/client/paytm.png" alt="Paytm" title="Paytm (India)">
+              </div>
+              <div class="single-brand">
+                <img src="Images/client/nykaa.png" alt="Nykaa" title="Nykaa (India)">
+              </div>
+              <div class="single-brand">
+                <img src="Images/client/aajtak.png" alt="AajTak" title="AajTak (TV Today Network, India)">
+              </div>
+              <div class="single-brand">
+                <img src="Images/client/osn.png" alt="OSN" title="OSN (Middle East and North Africa)">
+              </div>
+              <div class="single-brand">
+                <img src="Images/client/sonyliv.png" alt="SonyLiv" title="SonyLiv (India)">
+              </div>
+              <div class="single-brand">
+                <img src="Images/client/vodafone.png" alt="Ana Vodafone" title="Vodafone (Egypt͏)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Content Area-1 -->
+    <div class="content-area-l-11-1">
+      <div class="container">
+        <div class="row align-items-center justify-content-lg-start justify-content-center">
+          <div class="col-xl-6 col-md-5 col-md-10" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
+            <div class="content-img position-relative z-index-1">
+              <img src="image/l2/content-img1.png" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="offset-xxl-1 col-xxl-5 col-xl-6 col-lg-7 col-md-9" data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
+            <div class="content section-heading-5">
+              <h2>
+                35,70,000 + Apps Upload & Download
+              </h2>
+              <p>17,89,000+ users uploaded and downloaded the different apps more than 35,70,000+ times.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Content Area-2  -->
+    <div class="content-area-l-11-2">
+      <div class="container">
+        <div class="row align-items-center justify-content-lg-between justify-content-center">
+          <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-9 order-lg-1 order-1" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
+            <div class="content section-heading-5">
+              <h2>
+                Completely Free for Everyone.
+              </h2>
+              <div class="d-flex content-l-11-3-card">
+                <div class="content-body">
+                  <h5>No Size Limit</h5>
+                  <p>You can upload any size app if the linked Dropbox account has enough free space.</p>
+                </div>
+              </div>
+              <div class="d-flex content-l-11-3-card">
+                <div class="content-body">
+                  <h5>No Expiry</h5>
+                  <p>Your app will be live until you delete it from your Dropbox account.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-6 offset-xxl-2 col-xl-6 col-lg-5 col-md-9 order-lg-1 order-0" data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
+            <div class="content-img">
+              <img src="image/l2/content-img2.png" alt="" class="w-lg-auto w-100">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Content Area -->
+    <div class="content-area-l-11-3 position-relative">
+      <div class="container">
+        <div class="row align-items-center justify-content-center justify-content-lg-start">
+          <div class="col-xl-6 col-lg-6 col-md-8 order-lg-1 order-0" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
+            <div class="content-img">
+              <img src="image/l2/content-img3.png" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="offset-xl-1 col-xl-5 col-lg-6 col-md-9 order-lg-1 order-1" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+            <div class="content section-heading-5">
+              <h2>Completely Free for Everyone.</h2>
+              <p></p>
+              <ul class="list-unstyled pl-0">
+                <li class="d-flex align-items-center">
+                  <i class="fas fa-check"></i>Unlimited app installations
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="fas fa-check"></i>Auto email app distribution link
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="fas fa-check"></i>Keep same installation link for the same app
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="fas fa-check"></i>Auto-restart upload after network change or failure
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="fas fa-check"></i>Install previous version with same installation link
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Feature Area -->
+    <div class="feature-l-11">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-9 px-lg-12 col-md-12">
+            <div class="row justify-content-center">
+              <div class="col-lg-10 text-center">
+                <div class="section-heading-5">
+                  <h2>
+                    One Software, Every Solution
+                  </h2>
+                  <p>We designed and tested AppBox to solve most of the pain points for iOS App Wireless Installation.</p>
+                </div>
+              </div>
+            </div>
+            <div class="row feature-l-11-items justify-content-center">
+              <div class="col-md-6" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
+                <div class="d-flex ">
+                  <div class="icon-box">
+                    <i class="icon icon-pen-01"></i>
+                  </div>
+                  <div class="content-body">
+                    <h5>Easy to Use</h5>
+                    <p>AppBox is super easy to use. Just drag-drop your IPA file and hit the upload button.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
+                <div class="d-flex ">
+                  <div class="icon-box">
+                    <i class="icon icon-layers-3"></i>
+                  </div>
+                  <div class="content-body">
+                    <h5>Easy to Scale</h5>
+                    <p>Whether it’s a small internal app or a new one for millions of customers, AppBox is ready to serve your users.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
+                <div class="d-flex ">
+                  <div class="icon-box">
+                    <i class="icon icon-office"></i>
+                  </div>
+                  <div class="content-body">
+                    <h5>Fastlane support</h5>
+                    <p>AppBox has a plugin for Fastlane. Read more about <a target="_blank" href="https://github.com/getappbox/fastlane-plugin-appbox">AppBox Plugin for Fastlane.</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+                <div class="d-flex ">
+                  <div class="icon-box">
+                    <i class="icon icon-book-open-2"></i>
+                  </div>
+                  <div class="content-body">
+                    <h5>Build History</h5>
+                    <p>With <a target="_blank" href="https://docs.getappbox.com/Features/keepsamelink/">keep same link feature</a>, you can install the previous version with the same installation link.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" data-aos="fade-right" data-aos-duration="1200" data-aos-once="true">
+                <div class="d-flex ">
+                  <div class="icon-box">
+                    <i class="icon icon-pen-01"></i>
+                  </div>
+                  <div class="content-body">
+                    <h5>Full Controls</h5>
+                    <p>You have full control over your apps. All your apps are in your linked Dropbox account and can delete any time.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" data-aos="fade-left" data-aos-duration="1200" data-aos-once="true">
+                <div class="d-flex ">
+                  <div class="icon-box">
+                    <i class="icon icon-settings-gear-64-2"></i>
+                  </div>
+                  <div class="content-body">
+                    <h5>Quick Settings</h5>
+                    <p>Lots of customization options for download page and build and 3rd party integration (Slack, Hangout & MS Teams).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="docs-header-bottom">
-      <div class="docs-footer">
-        <!-- Social links -->
-        <ul class="social">
-          <li>
-            <iframe class="github-btn" src="https://ghbtns.com/github-btn.html?user=vineetchoudhary&amp;repo=AppBox-iOSAppsWirelessInstallation&amp;type=watch&amp;count=true"
-              width="100" height="20"></iframe>
-          </li>
-          <li>
-            <a data-ignore="push" href="https://twitter.com/share" class="twitter-share-button" data-url="https://getappbox.com" data-text="AppBox is a tool to build and deploy iOS app directly to the devices from your Dropbox account. "
-              data-via="tryappbox">Tweet</a>
-          </li>
-          <li><a data-ignore="push" href="https://twitter.com/AppBoxHQ" class="twitter-follow-button" data-show-count="true"> Follow @TryAppBox</a>
-          </li>
-        </ul>
-
-        <p class="docs-footer-text">Code licensed under the <a href="https://creativecommons.org/licenses/by-nd/4.0/" data-ignore="push">CC BY-ND 4.0</a>.</p>
-        <p>AppBox was lovingly crafted by <a href="https://github.com/vineetchoudhary" data-ignore="push">Vineet Choudhary</a>.</p>
-
-        <ul class="docs-footer-links">
-          <li><a href="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/issues" data-ignore="push">Issues</a></li>
-          <li>&middot;</li>
-          <li><a href="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases" data-ignore="push">Releases</a></li>
-        </ul>
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-duration="800" data-aos-once="true">
+      <div class="col-xl-10 col-lg-12 col-md-10">
+        <div class="testimonial-slider-l-11 position-relative">
+          <div class="single-slide focus-reset">
+            <div class="testimonial-card">
+              <br />
+              <br />
+              <br />
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
 
-
-      <script>
-        window.twttr = (function (d, s, id) {
-          var t, js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.async = 1;
-          js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-          return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
-        }(document, "script", "twitter-wjs"));
-      </script>
-
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-      <script src="/dist/js/ratchet.min.js"></script>
-      <script src="/assets/js/docs.min.js"></script>
+    <!-- Newsletter-area start -->
+    <div class="newsletter-l-11">
+      <div class="container">
+        <div class="row justify-content-center news-l-11-main-bg position-relative">
+          <div class="news-l-11-second-bg w-100 h-100"></div>
+          <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11" data-aos="fade-up" data-aos-duration="800" data-aos-once="true">
+            <div class="content text-center">
+              <h5>Try AppBox for Free!</h5>
+              <h2>35,70,000 + Total Apps</h2>
+              <h2>Upload & Download</h2>
+              <div class="btn-area">
+                <a href="/download" class="btn"><i class="fas fa-download d-inline-block"></i> Download AppBox</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer Area -->
+    <footer class="footer-l-11 text-center text-md-start">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="footer-logo-l-11">
+              <a href="#"><img src="Images/appbox.png">
+                <span>AppBox</span></a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="footer-widget-l-11">
+              <ul class="pl-0 list-unstyled d-flex flex-wrap justify-content-center align-items-end ">
+                <li class="d-flex"><a target="_blank" href="https://developerinsider.co/about/">About</a></li>
+                <li class="d-flex"><a target="_blank" href="https://docs.getappbox.com/GettingStarted/useappbox/">Getting Started</a></li>
+                <li class="d-flex"><a target="_blank" href="https://docs.getappbox.com/Features/keepsamelink/">Features</a></li>
+                <li class="d-flex"><a target="_blank" href="https://docs.getappbox.com/ContinuousIntegration/usewithjenkinsandgitlab/">CI & CD</a></li>
+                <li class="d-flex"><a target="_blank" href="https://docs.getappbox.com/FAQs/deleteapplication/">FAQs</a></li>
+                <li class="d-flex"><a target="_blank" href="http://paypal.me/vineetchoudhary">Support</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="social-icons-l-11">
+              <ul class="pl-0 list-unstyled d-flex  justify-content-center justify-content-md-end align-items-end ">
+                <li class="d-flex flex-column justify-content-center"><a href="https://twitter.com/appboxhq"><i class="fab fa-twitter"></i></a></li>
+                <li class="d-flex flex-column justify-content-center"><a href="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation"><i class="fab fa-github"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div class="copyright-area-l-11">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <p>© Developer Insider & AppBox. All right reserved. </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <!-- Vendor Scripts -->
+  <script src="js/vendor.min.js"></script>
+  <!-- Plugin's Scripts -->
+  <script src="./plugins/aos/aos.min.js"></script>
+  <script src="./plugins/slick/slick.min.js"></script>
+  <script src="./plugins/menu/menu.js"></script>
+  <!-- Activation Script -->
+  <script src="js/custom.js"></script>
 </body>
+
 </html>
