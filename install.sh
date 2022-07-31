@@ -8,7 +8,12 @@ APPLICATION_DIR='/Applications'
 
 echo "Downloading AppBox $VERSION..."
 curl -OL $FILE_URL
+
+echo "Uninstalling existing AppBox..."
+rm -rf $APPLICATION_DIR/$APP_NAME
+
 echo "Installing AppBox $VERSION..."
 tar -xf $FILE_NAME -C $APPLICATION_DIR
-echo "Starting AppBox $VERSION..."
+
+echo "Starting AppBox..."
 open $APPLICATION_DIR/$APP_NAME
