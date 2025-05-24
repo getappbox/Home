@@ -3,7 +3,7 @@
 VERSION="3.4.0"
 APP_NAME="AppBox.app"
 FILE_NAME="AppBox.tar.gz"
-FILE_URL="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/download/$VERSION/AppBox.tar.gz"
+FILE_URL="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/download/$VERSION/AppBox.tar.gz"
 APPLICATION_DIR='/Applications'
 
 echo "Downloading AppBox $VERSION..."
