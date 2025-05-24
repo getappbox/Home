@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/AppBoxIcon.png" type="image/png">
+    <title>AppBox - iOS Apps Wireless Installation</title>
+    <meta name="description" content="AppBox is a tool for iOS developers to deploy Development, Ad-Hoc, and In-house (Enterprise) applications directly to the devices from your Dropbox account.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 850px;
+            opacity: 0.9;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .install-script-hero {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-code {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            font-family: 'Courier New', 'Monaco', monospace;
+            color: #00ff00;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .terminal-code:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border-color: rgba(0, 255, 0, 0.3);
+        }
+
+        .terminal-code i.fa-terminal {
+            color: #00ff00;
+            font-size: 1.1rem;
+        }
+
+        .terminal-code code {
+            color: #ffffff;
+            background: none;
+            padding: 0;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .install-note {
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+
+        .main-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(238, 90, 36, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 80px 0;
+            clip-path: polygon(0 5%, 100% 0%, 100% 95%, 0% 100%);
+            margin-top: -50px;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* How it works */
+        .how-it-works {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Download Section */
+        .download {
+            background: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .download h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .download-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .download-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .download-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .download-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-card p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #333;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        .footer-section a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #3498db;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #3498db;
+            border-radius: 50%;
+            line-height: 50px;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .terminal-code {
+                font-size: 0.8rem;
+                padding: 0.8rem 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .terminal-code code {
+                font-size: 0.75rem;
+                word-break: break-all;
+                white-space: normal;
+            }
+
+            .features {
+                clip-path: none;
+                margin-top: 0;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <img src="images/AppBoxIcon.png" alt="AppBox Logo" style="height: 40px; width: auto;">
+                AppBox
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="#download" target="_blank">Download</a></li>
+                <li><a href="https://docs.getappbox.com" target="_blank">Docs</a></li>
+                <li><a href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation" target="_blank">GitHub</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#features" onclick="closeMobileMenu()">Features</a>
+                <a href="#how-it-works" onclick="closeMobileMenu()">How it Works</a>
+                <a href="#download" target="_blank">Docs</a>
+                <a href="https://docs.getappbox.com" target="_blank">Download</a>
+                <a href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation" target="_blank" onclick="closeMobileMenu()">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>iOS App Distribution Made Simple</h1>
+                <p>AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc, and In-house (Enterprise) applications directly to the devices from your Dropbox account.</p>
+                <div class="cta-buttons">
+                    <div class="install-script-hero">
+                        <div class="terminal-code">
+                            <i class="fas fa-terminal"></i>
+                            <code>curl -s https://getappbox.com/install.sh | bash</code>
+                            <button class="copy-btn" onclick="copyInstallScript()" title="Copy to clipboard">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <p class="install-note">Quick install command (recommended)</p>
+                    </div>
+                    <div class="main-buttons">
+                        <a href="/download.html" class="btn btn-primary" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Download AppBox
+                        </a>
+                        <a href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation" target="_blank" class="btn btn-secondary">
+                            <i class="fab fa-github"></i>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="fade-in">Why Choose AppBox?</h2>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <h3>Unlimited App Installations</h3>
+                        <p>Deploy as many apps as you need without any restrictions. Scale your development and testing workflow without worrying about installation limits.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </div>
+                        <h3>No File Size Restrictions</h3>
+                        <p>Upload apps of any size without limitations. Whether it's a lightweight utility or a resource-heavy game, AppBox handles it all seamlessly.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Never Expire</h3>
+                        <p>Your uploaded apps remain accessible indefinitely. No more worrying about broken links or expired installations disrupting your workflow.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <h3>Persistent Installation Links</h3>
+                        <p>Each app gets a unique, permanent installation link that remains consistent across updates. Share once, use forever with automatic version management.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3>Version History Access</h3>
+                        <p>Install any previous version of your app using the same link. Perfect for testing regressions, comparing versions, or rolling back when needed.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email Distribution</h3>
+                        <p>Automatically send installation links via email to your team members and beta testers. Streamline your app distribution workflow with built-in notifications.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Team Chat Integration</h3>
+                        <p>Connect with Slack, Microsoft Teams, and Google Chat through webhooks. Get instant notifications when new builds are ready for testing.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3>Centralized Dashboard</h3>
+                        <p>Manage all your uploaded apps from a single, intuitive dashboard. Access and manage all your uploaded builds from this interface.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Fastlane Integration</h3>
+                        <p>Seamlessly integrate with your existing Fastlane workflows. Automate app uploads and distribution as part of your CI/CD pipeline.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h2 class="fade-in">How It Works</h2>
+                <div class="steps">
+                    <div class="step fade-in">
+                        <div class="step-number">1</div>
+                        <h3>Connect Dropbox</h3>
+                        <p>Connect your Dropbox account to AppBox by signing in with your Dropbox account.</p>
+                    </div>
+                    <div class="step fade-in">
+                        <div class="step-number">2</div>
+                        <h3>Upload Your App</h3>
+                        <p>Drag and drop your .ipa file into AppBox or select it through the file browser.</p>
+                    </div>
+                    <div class="step fade-in">
+                        <div class="step-number">3</div>
+                        <h3>Generate Link</h3>
+                        <p>AppBox creates a secure installation link that you can share with your team or testers.</p>
+                    </div>
+                    <div class="step fade-in">
+                        <div class="step-number">4</div>
+                        <h3>Install via Safari</h3>
+                        <p>Users open the link in Safari on their iOS device and install the app with one tap.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="download">
+            <div class="container">
+                <h2 class="fade-in">Get Started Today</h2>
+                <p class="fade-in">Choose your preferred way to get AppBox</p>
+                <div class="download-cards">
+                    <div class="download-card fade-in">
+                        <h3><i class="fas fa-terminal"></i> Quick Install</h3>
+                        <p>Install AppBox with a single command using our automated installer script.</p>
+                        <div class="install-script-hero">
+                            <div class="terminal-code">
+                                <i class="fas fa-terminal"></i>
+                                <code>curl -s https://getappbox.com/install.sh | bash</code>
+                                <button class="copy-btn" onclick="copyInstallScript()" title="Copy to clipboard">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <p class="install-note">Quick install command (recommended)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="download-cards">
+                    <div class="download-card fade-in">
+                        <h3><i class="fas fa-download"></i> Direct Download</h3>
+                        <p>Download the latest version of AppBox directly from our GitHub releases.</p>
+                        <a href="/download.html" target="_blank" class="btn btn-secondary">
+                            Download Latest Release
+                        </a>
+                        <p></p>
+                        <p class="install-note">After download, unzip AppBox.app.zip file and move AppBox.app into /Applications directory</p>
+                    </div>
+                    <div class="download-card fade-in">
+                        <h3><i class="fas fa-rocket"></i> Fastlane plug-in</h3>
+                        <p>Automate app uploads and distribution as part of your CI/CD pipeline.</p>
+                        <a href="https://github.com/getappbox/fastlane-plugin-appbox" target="_blank" class="btn btn-secondary">
+                            View on GitHub
+                        </a>
+                        <p></p>
+                        <p class="install-note">Seamlessly integrate with your existing Fastlane workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AppBox</h3>
+                    <p>Simplifying iOS app distribution for developers worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="https://docs.getappbox.com/GettingStarted/">Getting Started</a>
+                    <a href="https://docs.getappbox.com/Fastlane/">Fastlane Integration</a>
+                    <a href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/issues" target="_blank">GitHub Issues</a>
+                    <a href="https://docs.getappbox.com/FAQ/">FAQ</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <a href="https://docs.getappbox.com/" target="_blank">Documentation</a>
+                    <a href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases" target="_blank">Releases</a>
+                    <a href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/blob/master/LICENSE.md" target="_blank">License</a>
+                    <a href="/privacy-policy.html" target="_blank">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/getappbox" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/getappbox" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="footer-section">&copy; <script>document.write(new Date().getFullYear());</script> AppBox. Open source project released under CC BY-ND 4.0 License.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.querySelector('.mobile-menu-toggle i');
+            
+            mobileMenu.classList.toggle('active');
+            
+            if (mobileMenu.classList.contains('active')) {
+                menuToggle.classList.remove('fa-bars');
+                menuToggle.classList.add('fa-times');
+            } else {
+                menuToggle.classList.remove('fa-times');
+                menuToggle.classList.add('fa-bars');
+            }
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.querySelector('.mobile-menu-toggle i');
+            
+            mobileMenu.classList.remove('active');
+            menuToggle.classList.remove('fa-times');
+            menuToggle.classList.add('fa-bars');
+        }
+
+        // Copy install script function
+        function copyInstallScript() {
+            const script = 'curl -s https://getappbox.com/install.sh | bash';
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(script).then(() => {
+                    showCopyFeedback();
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = script;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    showCopyFeedback();
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                }
+                
+                textArea.remove();
+            }
+        }
+
+        function showCopyFeedback() {
+            const copyBtn = document.querySelector('.copy-btn');
+            const originalContent = copyBtn.innerHTML;
+            
+            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+            copyBtn.style.background = 'rgba(0, 255, 0, 0.3)';
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalContent;
+                copyBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+            }, 2000);
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Fade in animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
