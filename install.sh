@@ -37,7 +37,7 @@ fi
 
 # Download
 echo "Downloading AppBox $VERSION..."
-curl -L -o "$FILE_NAME" "$FILE_URL"
+curl -L --progress-bar -o "$FILE_NAME" "$FILE_URL"
 if [ $? -ne 0 ] || [ ! -f "$FILE_NAME" ]; then
     echo "Error: Download failed."
     exit 1
