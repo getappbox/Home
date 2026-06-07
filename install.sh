@@ -19,7 +19,7 @@ echo "Latest version: $VERSION"
 # Check if AppBox is running and offer to quit
 if pgrep -x "AppBox" > /dev/null 2>&1; then
     printf "AppBox is currently running. Quit AppBox to continue update? (y/n): "
-    read -r answer
+    read -r answer < /dev/tty
     if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
         echo "Quitting AppBox..."
         osascript -e 'quit app "AppBox"'
