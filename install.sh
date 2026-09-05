@@ -4,17 +4,24 @@ APP_NAME="AppBox.app"
 FILE_NAME="AppBox.tar.gz"
 APPLICATION_DIR="/Applications"
 GITHUB_REPO="getappbox/AppBox-iOSAppsWirelessInstallation"
+LATEST_URL="https://github.com/$GITHUB_REPO/releases/latest/download/$FILE_NAME"
 
-# Fetch latest version from GitHub
+WORK_DIR=$(mktemp -d) || { echo "Error: Unable to create a temporary directory."; exit 1; }
+cleanup() { rm -rf "$WORK_DIR"; }
+trap cleanup EXIT INT TERM
+
 echo "Checking for latest version..."
-VERSION=$(curl -s "https://api.github.com/repos/$GITHUB_REPO/releases/latest" | grep '"tag_name"' | sed -E 's/.*"tag_name": *"([^"]+)".*/\1/')
-if [ -z "$VERSION" ]; then
-    echo "Error: Failed to fetch latest version from GitHub."
-    exit 1
-fi
+VERSION=$(curl -fsS "https://api.github.com/repos/$GITHUB_REPO/releases/latest" 2>/dev/null \
+    | grep '"tag_name"' \
+    | sed -E 's/.*"tag_name": *"([^"]+)".*/\1/')
 
-FILE_URL="https://github.com/$GITHUB_REPO/releases/download/$VERSION/$FILE_NAME"
-echo "Latest version: $VERSION"
+if [ -n "$VERSION" ]; then
+    FILE_URL="https://github.com/$GITHUB_REPO/releases/download/$VERSION/$FILE_NAME"
+    echo "Latest version: $VERSION"
+else
+    FILE_URL="$LATEST_URL"
+    echo "Could not reach the GitHub API (rate limited?) — downloading the latest release directly."
+fi
 
 # Check if AppBox is running and offer to quit
 if pgrep -x "AppBox" > /dev/null 2>&1; then
@@ -36,27 +43,44 @@ if pgrep -x "AppBox" > /dev/null 2>&1; then
 fi
 
 # Download
-echo "Downloading AppBox $VERSION..."
-curl -L --progress-bar -o "$FILE_NAME" "$FILE_URL"
-if [ $? -ne 0 ] || [ ! -f "$FILE_NAME" ]; then
-    echo "Error: Download failed."
+ARCHIVE="$WORK_DIR/$FILE_NAME"
+echo "Downloading AppBox${VERSION:+ $VERSION}..."
+if ! curl -fL --progress-bar -o "$ARCHIVE" "$FILE_URL"; then
+    if [ "$FILE_URL" != "$LATEST_URL" ]; then
+        echo "Download failed, retrying with the latest release URL..."
+        if ! curl -fL --progress-bar -o "$ARCHIVE" "$LATEST_URL"; then
+            echo "Error: Download failed."
+            exit 1
+        fi
+    else
+        echo "Error: Download failed."
+        exit 1
+    fi
+fi
+
+# Check if the downloaded file is a valid tar.gz archive
+if [ ! -s "$ARCHIVE" ] || ! tar -tzf "$ARCHIVE" > /dev/null 2>&1; then
+    echo "Error: The downloaded file is not a valid AppBox archive."
     exit 1
 fi
 
-# Install
-echo "Installing AppBox $VERSION..."
-rm -rf "$APPLICATION_DIR/$APP_NAME"
-tar -xf "$FILE_NAME" -C "$APPLICATION_DIR"
-if [ $? -ne 0 ]; then
+# Unpack somewhere safe first. The previous version is only removed once the new
+# one is on disk, so a bad download can never leave the machine with no AppBox.
+STAGING="$WORK_DIR/staging"
+mkdir -p "$STAGING"
+if ! tar -xf "$ARCHIVE" -C "$STAGING" || [ ! -d "$STAGING/$APP_NAME" ]; then
     echo "Error: Installation failed."
-    rm -f "$FILE_NAME"
     exit 1
 fi
 
-# Cleanup
-rm -f "$FILE_NAME"
+echo "Installing AppBox${VERSION:+ $VERSION}..."
+rm -rf "$APPLICATION_DIR/$APP_NAME"
+if ! mv "$STAGING/$APP_NAME" "$APPLICATION_DIR/$APP_NAME"; then
+    echo "Error: Unable to move AppBox into $APPLICATION_DIR."
+    exit 1
+fi
 
 # Launch
 echo "Starting AppBox..."
 open "$APPLICATION_DIR/$APP_NAME"
-echo "AppBox $VERSION installed successfully!"
+echo "AppBox${VERSION:+ $VERSION} installed successfully!"

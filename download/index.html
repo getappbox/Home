@@ -8,6 +8,8 @@
   <meta name="robots" content="noindex">
   <link rel="icon" href="/images/AppBoxIcon.png" type="image/png">
   <meta name="theme-color" content="#0a0a0c">
+  <meta http-equiv="refresh" content="0; url=https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest/download/AppBox.app.zip">
+
   <style>
     body {
       margin: 0;
@@ -54,25 +56,10 @@
   <main>
     <img src="/images/AppBoxIcon.png" alt="">
     <h1>Downloading AppBox&hellip;</h1>
-    <p>If the download doesn't start, <a id="download-link" href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest">get it from GitHub</a>.</p>
+    <p>If the download doesn't start, <a href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest/download/AppBox.app.zip">download it directly</a>. </p>
+    <p>Or browse <a href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest">all release files</a>.</p>
     <p><a href="/">Back to home</a></p>
   </main>
-  <script>
-    fetch("https://api.github.com/repos/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest")
-      .then(function (response) { return response.json(); })
-      .then(function (data) {
-        var asset = (data.assets || []).find(function (a) { return a.name === "AppBox.app.zip"; });
-        if (asset) {
-          document.getElementById("download-link").href = asset.browser_download_url;
-          window.location.href = asset.browser_download_url;
-        } else {
-          window.location.href = data.html_url;
-        }
-      })
-      .catch(function() {
-        window.location.href = "https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/download/4.0.0/AppBox.app.zip";
-      });
-  </script>
 </body>
 
 </html>
