@@ -1,21 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Downloading AppBox…</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/images/AppBoxIcon.png" type="image/png">
+  <meta name="theme-color" content="#0a0a0c">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #0a0a0c;
+      color: #f2f3f5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    img {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      margin: 0 auto 20px;
+      display: block;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.35rem;
+      font-weight: 650;
+      letter-spacing: -.01em;
+    }
+
+    p {
+      margin: 12px 0 0;
+      color: #9b9da6;
+      font-size: .96rem;
+    }
+
+    a {
+      color: #58a9ff;
+    }
+  </style>
+</head>
+
 <body>
-  <p>Downloading AppBox... If the download doesn't start, <a id="download-link" href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest">click here</a>.</p>
+  <main>
+    <img src="/images/AppBoxIcon.png" alt="">
+    <h1>Downloading AppBox&hellip;</h1>
+    <p>If the download doesn't start, <a id="download-link" href="https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest">get it from GitHub</a>.</p>
+    <p><a href="/">Back to home</a></p>
+  </main>
   <script>
     fetch("https://api.github.com/repos/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest")
-      .then(function(response) { return response.json(); })
-      .then(function(data) {
-        var asset = data.assets.find(function(a) { return a.name === "AppBox.app.zip"; });
+      .then(function (response) { return response.json(); })
+      .then(function (data) {
+        var asset = (data.assets || []).find(function (a) { return a.name === "AppBox.app.zip"; });
         if (asset) {
+          document.getElementById("download-link").href = asset.browser_download_url;
           window.location.href = asset.browser_download_url;
         } else {
           window.location.href = data.html_url;
         }
       })
       .catch(function() {
-        window.location.href = "https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/latest";
+        window.location.href = "https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/releases/download/4.0.0/AppBox.app.zip";
       });
   </script>
 </body>
+
 </html>
