@@ -1,7 +1,7 @@
 #!/bin/sh
 
 APP_NAME="AppBox.app"
-FILE_NAME="AppBox.tar.gz"
+FILE_NAME="AppBox.app.zip"
 APPLICATION_DIR="/Applications"
 GITHUB_REPO="getappbox/AppBox-iOSAppsWirelessInstallation"
 LATEST_URL="https://github.com/$GITHUB_REPO/releases/latest/download/$FILE_NAME"
@@ -68,7 +68,7 @@ fi
 # one is on disk, so a bad download can never leave the machine with no AppBox.
 STAGING="$WORK_DIR/staging"
 mkdir -p "$STAGING"
-if ! tar -xf "$ARCHIVE" -C "$STAGING" || [ ! -d "$STAGING/$APP_NAME" ]; then
+if ! ditto -x -k "$ARCHIVE" "$STAGING" || [ ! -d "$STAGING/$APP_NAME" ]; then
     echo "Error: Installation failed."
     exit 1
 fi
